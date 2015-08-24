@@ -1,0 +1,66 @@
+---
+title       : Body Mass Index Calculator
+subtitle    : Coursera Developing Data Products Course
+author      : Dan Mungas
+job         : 
+framework   : io2012           # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js          # {highlight.js, prettify, highlight}
+hitheme     : tomorrow              # 
+widgets     : [bootstrap, mathjax]  # {mathjax, quiz, bootstrap}
+mode        : standalone         # {standalone, selfcontained, draft}
+#   knit        : slidify::knit2slides
+runtime     : shiny
+output      : ioslides_presentation
+#   output      : html_document
+---
+
+
+## Background
+
+-   The body mass index (BMI) is a simple function of height and weight
+-   It has been widely used to quantify obesity
+-   There are many studies showing a relationship of BMI with various health outcomes
+
+
+##  BMI Calculation
+
+-   BMI can be calculated using Metric or English units for measuring height or weight
+-   The formula for Metric measurement units is:
+
+$$\frac{weight_{kilograms}}{height_{meters}^2}$$
+
+- The formula for English measurement units is:
+
+$$\frac{weight_{pounds} x 703}{height_{inches}^2}$$
+
+
+##  BMI Calculator
+
+```{r echo = FALSE}
+radioButtons("units", "Measurement Units", c("English","Metric"), selected = "English")
+conditionalPanel(
+    condition = "input.units == 'English'",
+        sliderInput("ht", label = "Height (in inches):",
+            min = 40, max = 90, value = 65, step = 1),
+        sliderInput("wt", label = "Weight (in pounds):",
+            min = 50, max = 450, value = 150, step = 1)
+    )
+conditionalPanel(
+    condition = "input.units == 'Metric'",
+        sliderInput("htm", label = "Height (in centimeters):",
+            min = 75, max = 250, value = 165, step = 1),
+        sliderInput("wtm", label = "Weight (in kilograms):",
+            min = 20, max = 220, value = 70, step = 1)
+    )
+#   actionButton("submitButton","Submit")
+bmicalc <- reactive(
+    round(ifelse(input$units == "English",
+        input$wt*703 / input$ht^2,
+        input$wtm / (input$htm/100)^2)
+          ,2)
+)
+output$bmicalc <- renderPrint({cat(bmicalc())})
+p('BMI = ') 
+textOutput('bmicalc')
+```
+

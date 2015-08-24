@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <script type="application/shiny-singletons"></script>
+  <script type="application/html-dependencies">json2[2014.02.04];jquery[1.11.0];shiny[0.12.2]</script>
+<script src="Body%20Mass%20Index%20Calculator_files/json2-min.js"></script>
+<script src="Body%20Mass%20Index%20Calculator_files/jquery.js"></script>
+<link href="Body%20Mass%20Index%20Calculator_files/shiny.css" rel="stylesheet">
+<script src="Body%20Mass%20Index%20Calculator_files/shiny.js"></script>
+  <script src="Body%20Mass%20Index%20Calculator_files/rmd_loader.js"></script>
+  <link href="Body%20Mass%20Index%20Calculator_files/rmd_loader.css" rel="stylesheet">
+<script src="Body%20Mass%20Index%20Calculator_files/rsiframe.js"></script><meta content="[object Object]" name="0"><link href="Body%20Mass%20Index%20Calculator_files/bootstrap.css" rel="stylesheet" type="text/css"><script src="Body%20Mass%20Index%20Calculator_files/bootstrap.js"></script><script src="Body%20Mass%20Index%20Calculator_files/html5shiv.js"></script><script src="Body%20Mass%20Index%20Calculator_files/respond.js"></script><link href="Body%20Mass%20Index%20Calculator_files/ion_002.css" rel="stylesheet" type="text/css"><link href="Body%20Mass%20Index%20Calculator_files/ion.css" rel="stylesheet" type="text/css"><script src="Body%20Mass%20Index%20Calculator_files/ion.js"></script><script src="Body%20Mass%20Index%20Calculator_files/strftime-min.js"></script><link href="Body%20Mass%20Index%20Calculator_files/rmd_perf.css" rel="stylesheet" type="text/css"><script src="Body%20Mass%20Index%20Calculator_files/rmd_perf.js"></script>
+  <title>Body Mass Index Calculator</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc">
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <link rel="stylesheet" media="all" href="Body%20Mass%20Index%20Calculator_files/fonts.css">
+
+  <link rel="stylesheet" media="all" href="Body%20Mass%20Index%20Calculator_files/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="Body%20Mass%20Index%20Calculator_files/phone.css">
+
+  <!-- base href="http://127.0.0.1:3045/index.Rmd" -->
+
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'Body Mass Index Calculator',
+                        subtitle: 'Coursera Developing Data Products Course',
+                useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+              },
+
+      // Author information
+      presenters: [
+            {
+        name:  'Dan Mungas' ,
+        company: '',
+        gplus: '',
+        twitter: '',
+        www: '',
+        github: ''
+      },
+            ]
+    };
+  </script>
+
+  <style type="text/css">
+
+    b, strong {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+
+  </style>
+
+
+
+<script src="Body%20Mass%20Index%20Calculator_files/MathJax.js" type="text/javascript"></script><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Hover_Arrow {position: absolute; width: 15px; height: 11px; cursor: pointer}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; color: #666666}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_Menu_Close {position: absolute; width: 31px; height: 31px; top: -15px; left: -15px}
+</style><style type="text/css">.MathJax_Preview .MJXc-math {color: inherit!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXc-script {font-size: .8em}
+.MJXc-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXc-bold {font-weight: bold}
+.MJXc-italic {font-style: italic}
+.MJXc-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXc-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXc-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXc-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXc-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXc-largeop {font-size: 150%}
+.MJXc-largeop.MJXc-int {vertical-align: -.2em}
+.MJXc-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXc-display {display: block; text-align: center; margin: 1em 0}
+.MJXc-math span {display: inline-block}
+.MJXc-box {display: block!important; text-align: center}
+.MJXc-box:after {content: " "}
+.MJXc-rule {display: block!important; margin-top: .1em}
+.MJXc-char {display: block!important}
+.MJXc-mo {margin: 0 .15em}
+.MJXc-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXc-denom {display: inline-table!important; width: 100%}
+.MJXc-denom > * {display: table-row!important}
+.MJXc-surd {vertical-align: top}
+.MJXc-surd > * {display: block!important}
+.MJXc-script-box > *  {display: table!important; height: 50%}
+.MJXc-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXc-script-box > *:last-child > * {vertical-align: bottom}
+.MJXc-script-box > * > * > * {display: block!important}
+.MJXc-mphantom {visibility: hidden}
+.MJXc-munderover {display: inline-table!important}
+.MJXc-over {display: inline-block!important; text-align: center}
+.MJXc-over > * {display: block!important}
+.MJXc-munderover > * {display: table-row!important}
+.MJXc-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXc-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXc-mtr {display: table-row!important}
+.MJXc-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXc-mtr > .MJXc-mtd:first-child {padding-left: 0}
+.MJXc-mtr:first-child > .MJXc-mtd {padding-top: 0}
+.MJXc-mlabeledtr {display: table-row!important}
+.MJXc-mlabeledtr > .MJXc-mtd:first-child {padding-left: 0}
+.MJXc-mlabeledtr:first-child > .MJXc-mtd {padding-top: 0}
+.MJXc-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXc-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXc-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXc-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXc-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXc-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXc-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXc-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXc-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXc-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXc-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_CHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style><style type="text/css">.MathJax_Display {text-align: center; margin: 1em 0em; position: relative; display: block!important; text-indent: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; width: 100%}
+.MathJax .merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MathJax .MJX-monospace {font-family: monospace}
+.MathJax .MJX-sans-serif {font-family: sans-serif}
+#MathJax_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true'); padding: 3px 4px; z-index: 401; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none}
+.MathJax {display: inline; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; padding: 0; margin: 0}
+.MathJax img, .MathJax nobr, .MathJax a {border: 0; padding: 0; margin: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+img.MathJax_strut {border: 0!important; padding: 0!important; margin: 0!important; vertical-align: 0!important}
+.MathJax span {display: inline; position: static; border: 0; padding: 0; margin: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+.MathJax nobr {white-space: nowrap!important}
+.MathJax img {display: inline!important; float: none!important}
+.MathJax * {transition: none; -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none}
+.MathJax_Processing {visibility: hidden; position: fixed; width: 0; height: 0; overflow: hidden}
+.MathJax_Processed {display: none!important}
+.MathJax_ExBox {display: block!important; overflow: hidden; width: 1px; height: 60ex; min-height: 0; max-height: none}
+.MathJax .MathJax_EmBox {display: block!important; overflow: hidden; width: 1px; height: 60em; min-height: 0; max-height: none}
+.MathJax .MathJax_HitBox {cursor: text; background: white; opacity: 0; filter: alpha(opacity=0)}
+.MathJax .MathJax_HitBox * {filter: none; opacity: 1; background: transparent}
+#MathJax_Tooltip * {filter: none; opacity: 1; background: transparent}
+@font-face {font-family: MathJax_Blank; src: url('about:blank')}
+.MathJax .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+<body class="loaded"><div style="visibility: hidden; overflow: hidden; position: absolute; top: 0px; height: 1px; width: auto; padding: 0px; border: 0px none; margin: 0px; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal;"><div id="MathJax_Hidden"><br><br></div></div><div style="display: none;" id="MathJax_Message"></div>
+  <div>
+    <div style="display: none;" data-display-if="!output.__reactivedoc__">
+      <div id="rmd_loader_wrapper">
+        <div id="rmd_loader" style="">
+          <img src="Body%20Mass%20Index%20Calculator_files/rmd_loader.gif">
+          <p>Loading</p>
+        </div>
+      </div>
+    </div>
+    <div id="__reactivedoc__" class="shiny-html-output shiny-bound-output">
+
+
+
+
+
+<slides>
+
+  <slide data-total-slides="4" data-slide-num="1" class="title-slide segue nobackground current">
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title="">Body Mass Index Calculator</h1>
+      <h2 data-config-subtitle="">Coursera Developing Data Products Course</h2>
+      <p data-config-presenter="">Dan Mungas<br></p>
+          </hgroup>
+  </slide>
+
+<slide data-total-slides="4" data-slide-num="2" class="next"><hgroup><h2>Background</h2></hgroup><article id="background">
+
+<ul>
+<li>The body mass index (BMI) is a simple function of height and weight</li>
+<li>It has been widely used to quantify obesity</li>
+<li>There are many studies showing a relationship of BMI with various health outcomes</li>
+</ul>
+
+</article></slide><slide data-total-slides="4" data-slide-num="3" class="far-next"><hgroup><h2>BMI Calculation</h2></hgroup><article id="bmi-calculation">
+
+<ul>
+<li>BMI can be calculated using Metric or English units for measuring height or weight</li>
+<li>The formula for Metric measurement units is:</li>
+</ul>
+
+<p><span style="color: inherit;" class="MathJax_Preview"></span><div style="text-align: center;" class="MathJax_Display"><span style="" id="MathJax-Element-1-Frame" class="MathJax"><nobr><span style="width: 6.391em; display: inline-block;" role="math" id="MathJax-Span-1" class="math"><span style="display: inline-block; position: relative; width: 5.958em; height: 0px; font-size: 107%;"><span style="position: absolute; clip: rect(0.404em, 1000em, 3.259em, -1000em); top: -2.044em; left: 0em;"><span id="MathJax-Span-2" class="mrow"><span id="MathJax-Span-3" class="mfrac"><span style="display: inline-block; position: relative; width: 5.72em; height: 0px; margin-right: 0.12em; margin-left: 0.12em;"><span style="position: absolute; clip: rect(3.114em, 1000em, 4.443em, -1000em); top: -4.754em; left: 50%; margin-left: -2.8em;"><span id="MathJax-Span-4" class="mrow"><span style="font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-5" class="mi">w</span><span style="font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-6" class="mi">e</span><span style="font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-7" class="mi">i</span><span style="font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-8" class="mi">g</span><span style="font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-9" class="mi">h</span><span id="MathJax-Span-10" class="msubsup"><span style="display: inline-block; position: relative; width: 3.211em; height: 0px;"><span style="position: absolute; clip: rect(3.251em, 1000em, 4.158em, -1000em); top: -3.972em; left: 0em;"><span style="font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-11" class="mi">t<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.018em;"></span></span><span style="display: inline-block; width: 0px; height: 3.972em;"></span></span><span style="position: absolute; top: -3.822em; left: 0.278em;"><span id="MathJax-Span-12" class="texatom"><span id="MathJax-Span-13" class="mrow"><span style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-14" class="mi">k<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.012em;"></span></span><span style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-15" class="mi">i</span><span style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-16" class="mi">l<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.001em;"></span></span><span style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-17" class="mi">o</span><span style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-18" class="mi">g</span><span style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-19" class="mi">r<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.016em;"></span></span><span style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-20" class="mi">a</span><span style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-21" class="mi">m</span><span style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-22" class="mi">s</span></span></span><span style="display: inline-block; width: 0px; height: 3.972em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 3.972em;"></span></span><span style="position: absolute; clip: rect(2.974em, 1000em, 4.378em, -1000em); top: -3.163em; left: 50%; margin-left: -2.245em;"><span id="MathJax-Span-23" class="mrow"><span style="font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-24" class="mi">h</span><span style="font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-25" class="mi">e</span><span style="font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-26" class="mi">i</span><span style="font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-27" class="mi">g</span><span style="font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-28" class="mi">h</span><span id="MathJax-Span-29" class="msubsup"><span style="display: inline-block; position: relative; width: 2.267em; height: 0px;"><span style="position: absolute; clip: rect(3.251em, 1000em, 4.158em, -1000em); top: -3.972em; left: 0em;"><span style="font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-30" class="mi">t<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.018em;"></span></span><span style="display: inline-block; width: 0px; height: 3.972em;"></span></span><span style="position: absolute; clip: rect(3.319em, 1000em, 4.147em, -1000em); top: -4.316em; left: 0.351em;"><span style="font-size: 70.7%; font-family: STIXGeneral;" id="MathJax-Span-31" class="mn">2</span><span style="display: inline-block; width: 0px; height: 3.972em;"></span></span><span style="position: absolute; clip: rect(3.411em, 1000em, 4.156em, -1000em); top: -3.75em; left: 0.278em;"><span id="MathJax-Span-32" class="texatom"><span id="MathJax-Span-33" class="mrow"><span style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-34" class="mi">m</span><span style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-35" class="mi">e</span><span style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-36" class="mi">t<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.013em;"></span></span><span style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-37" class="mi">e</span><span style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-38" class="mi">r<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.016em;"></span></span><span style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-39" class="mi">s</span></span></span><span style="display: inline-block; width: 0px; height: 3.972em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 3.972em;"></span></span><span style="position: absolute; clip: rect(0.803em, 1000em, 1.227em, -1000em); top: -1.271em; left: 0em;"><span style="border-left: 5.72em solid; display: inline-block; overflow: hidden; width: 0px; height: 1.25px; vertical-align: 0em;"></span><span style="display: inline-block; width: 0px; height: 1.051em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.044em;"></span></span></span><span style="border-left: 0em solid; display: inline-block; overflow: hidden; width: 0px; height: 2.804em; vertical-align: -1.175em;"></span></span></nobr></span></div><script id="MathJax-Element-1" type="math/tex; mode=display">\frac{weight_{kilograms}}{height_{meters}^2}</script></p>
+
+<ul>
+<li>The formula for English measurement units is:</li>
+</ul>
+
+<p><span style="color: inherit;" class="MathJax_Preview"></span><div style="text-align: center;" class="MathJax_Display"><span style="" id="MathJax-Element-2-Frame" class="MathJax"><nobr><span style="width: 7.641em; display: inline-block;" role="math" id="MathJax-Span-40" class="math"><span style="display: inline-block; position: relative; width: 7.126em; height: 0px; font-size: 107%;"><span style="position: absolute; clip: rect(0.405em, 1000em, 3.356em, -1000em); top: -2.044em; left: 0em;"><span id="MathJax-Span-41" class="mrow"><span id="MathJax-Span-42" class="mfrac"><span style="display: inline-block; position: relative; width: 6.874em; height: 0px; margin-right: 0.12em; margin-left: 0.12em;"><span style="position: absolute; clip: rect(3.114em, 1000em, 4.442em, -1000em); top: -4.753em; left: 50%; margin-left: -3.377em;"><span id="MathJax-Span-43" class="mrow"><span style="font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-44" class="mi">w</span><span style="font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-45" class="mi">e</span><span style="font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-46" class="mi">i</span><span style="font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-47" class="mi">g</span><span style="font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-48" class="mi">h</span><span id="MathJax-Span-49" class="msubsup"><span style="display: inline-block; position: relative; width: 2.418em; height: 0px;"><span style="position: absolute; clip: rect(3.251em, 1000em, 4.158em, -1000em); top: -3.972em; left: 0em;"><span style="font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-50" class="mi">t<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.018em;"></span></span><span style="display: inline-block; width: 0px; height: 3.972em;"></span></span><span style="position: absolute; top: -3.822em; left: 0.278em;"><span id="MathJax-Span-51" class="texatom"><span id="MathJax-Span-52" class="mrow"><span style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-53" class="mi">p</span><span style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-54" class="mi">o</span><span style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-55" class="mi">u</span><span style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-56" class="mi">n</span><span style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-57" class="mi">d<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.019em;"></span></span><span style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-58" class="mi">s</span></span></span><span style="display: inline-block; width: 0px; height: 3.972em;"></span></span></span></span><span style="font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-59" class="mi">x<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span style="font-family: STIXGeneral;" id="MathJax-Span-60" class="mn">703</span></span><span style="display: inline-block; width: 0px; height: 3.972em;"></span></span><span style="position: absolute; clip: rect(2.974em, 1000em, 4.475em, -1000em); top: -3.163em; left: 50%; margin-left: -2.191em;"><span id="MathJax-Span-61" class="mrow"><span style="font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-62" class="mi">h</span><span style="font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-63" class="mi">e</span><span style="font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-64" class="mi">i</span><span style="font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-65" class="mi">g</span><span style="font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-66" class="mi">h</span><span id="MathJax-Span-67" class="msubsup"><span style="display: inline-block; position: relative; width: 2.16em; height: 0px;"><span style="position: absolute; clip: rect(3.251em, 1000em, 4.158em, -1000em); top: -3.972em; left: 0em;"><span style="font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-68" class="mi">t<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.018em;"></span></span><span style="display: inline-block; width: 0px; height: 3.972em;"></span></span><span style="position: absolute; clip: rect(3.319em, 1000em, 4.147em, -1000em); top: -4.316em; left: 0.351em;"><span style="font-size: 70.7%; font-family: STIXGeneral;" id="MathJax-Span-69" class="mn">2</span><span style="display: inline-block; width: 0px; height: 3.972em;"></span></span><span style="position: absolute; clip: rect(3.314em, 1000em, 4.156em, -1000em); top: -3.653em; left: 0.278em;"><span id="MathJax-Span-70" class="texatom"><span id="MathJax-Span-71" class="mrow"><span style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-72" class="mi">i</span><span style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-73" class="mi">n</span><span style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-74" class="mi">c</span><span style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-75" class="mi">h</span><span style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-76" class="mi">e</span><span style="font-size: 70.7%; font-family: STIXGeneral; font-style: italic;" id="MathJax-Span-77" class="mi">s</span></span></span><span style="display: inline-block; width: 0px; height: 3.972em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 3.972em;"></span></span><span style="position: absolute; clip: rect(0.803em, 1000em, 1.227em, -1000em); top: -1.271em; left: 0em;"><span style="border-left: 6.874em solid; display: inline-block; overflow: hidden; width: 0px; height: 1.25px; vertical-align: 0em;"></span><span style="display: inline-block; width: 0px; height: 1.051em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.044em;"></span></span></span><span style="border-left: 0em solid; display: inline-block; overflow: hidden; width: 0px; height: 2.907em; vertical-align: -1.278em;"></span></span></nobr></span></div><script id="MathJax-Element-2" type="math/tex; mode=display">\frac{weight_{pounds} x 703}{height_{inches}^2}</script></p>
+
+</article></slide><slide data-total-slides="4" data-slide-num="4" class=""><hgroup><h2>BMI Calculator</h2></hgroup><article id="bmi-calculator">
+
+<p></p><div id="units" class="form-group shiny-input-radiogroup shiny-input-container shiny-bound-input">
+<label class="control-label" for="units">Measurement Units</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input name="units" value="English" checked="checked" type="radio">
+<span>English</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input name="units" value="Metric" type="radio">
+<span>Metric</span>
+</label>
+</div>
+</div>
+</div><div style="display: block;" data-display-if="input.units == 'English'">
+<div class="form-group shiny-input-container">
+<label class="control-label" for="ht">Height (in inches):</label>
+<span class="irs js-irs-0 irs-with-grid"><span class="irs"><span class="irs-line" tabindex="-1"><span class="irs-line-left"></span><span class="irs-line-mid"></span><span class="irs-line-right"></span></span><span class="irs-min">40</span><span class="irs-max">90</span><span style="visibility: hidden;" class="irs-from">0</span><span style="visibility: hidden;" class="irs-to">0</span><span class="irs-single">0</span></span><span class="irs-grid"><span class="irs-grid-pol" style="left: 0%"></span><span class="irs-grid-text js-grid-text-0" style="left: 0%">40</span><span class="irs-grid-pol small" style="left: 6.666666667%"></span><span class="irs-grid-pol small" style="left: 3.333333333%"></span><span class="irs-grid-pol" style="left: 10%"></span><span class="irs-grid-text js-grid-text-1" style="left: 10%; visibility: hidden;">45</span><span class="irs-grid-pol small" style="left: 16.666666667%"></span><span class="irs-grid-pol small" style="left: 13.333333333%"></span><span class="irs-grid-pol" style="left: 20%"></span><span class="irs-grid-text js-grid-text-2" style="left: 20%; visibility: hidden;">50</span><span class="irs-grid-pol small" style="left: 26.666666667%"></span><span class="irs-grid-pol small" style="left: 23.333333333%"></span><span class="irs-grid-pol" style="left: 30%"></span><span class="irs-grid-text js-grid-text-3" style="left: 30%; visibility: hidden;">55</span><span class="irs-grid-pol small" style="left: 36.666666667%"></span><span class="irs-grid-pol small" style="left: 33.333333333%"></span><span class="irs-grid-pol" style="left: 40%"></span><span class="irs-grid-text js-grid-text-4" style="left: 40%">60</span><span class="irs-grid-pol small" style="left: 46.666666667%"></span><span class="irs-grid-pol small" style="left: 43.333333333%"></span><span class="irs-grid-pol" style="left: 50%"></span><span class="irs-grid-text js-grid-text-5" style="left: 50%; visibility: hidden;">65</span><span class="irs-grid-pol small" style="left: 56.666666667%"></span><span class="irs-grid-pol small" style="left: 53.333333333%"></span><span class="irs-grid-pol" style="left: 60%"></span><span class="irs-grid-text js-grid-text-6" style="left: 60%; visibility: hidden;">70</span><span class="irs-grid-pol small" style="left: 66.666666667%"></span><span class="irs-grid-pol small" style="left: 63.333333333%"></span><span class="irs-grid-pol" style="left: 70%"></span><span class="irs-grid-text js-grid-text-7" style="left: 70%; visibility: hidden;">75</span><span class="irs-grid-pol small" style="left: 76.666666667%"></span><span class="irs-grid-pol small" style="left: 73.333333333%"></span><span class="irs-grid-pol" style="left: 80%"></span><span class="irs-grid-text js-grid-text-8" style="left: 80%">80</span><span class="irs-grid-pol small" style="left: 86.666666667%"></span><span class="irs-grid-pol small" style="left: 83.333333333%"></span><span class="irs-grid-pol" style="left: 90%"></span><span class="irs-grid-text js-grid-text-9" style="left: 90%; visibility: hidden;">85</span><span class="irs-grid-pol small" style="left: 96.666666667%"></span><span class="irs-grid-pol small" style="left: 93.333333333%"></span><span class="irs-grid-pol" style="left: 100%"></span><span class="irs-grid-text js-grid-text-10" style="left: 100%; visibility: hidden;">90</span></span><span class="irs-bar"></span><span class="irs-bar-edge"></span><span class="irs-shadow shadow-single"></span><span class="irs-slider single"></span></span><input readonly="readonly" class="js-range-slider irs-hidden-input shiny-bound-input" id="ht" data-min="40" data-max="90" data-from="65" data-step="1" data-grid="true" data-grid-num="10" data-grid-snap="false" data-prettify-separator="," data-keyboard="true" data-keyboard-step="2" data-drag-interval="true" data-data-type="number">
+</div>
+<div class="form-group shiny-input-container">
+<label class="control-label" for="wt">Weight (in pounds):</label>
+<span class="irs js-irs-1 irs-with-grid"><span class="irs"><span class="irs-line" tabindex="-1"><span class="irs-line-left"></span><span class="irs-line-mid"></span><span class="irs-line-right"></span></span><span class="irs-min">50</span><span class="irs-max">450</span><span style="visibility: hidden;" class="irs-from">0</span><span style="visibility: hidden;" class="irs-to">0</span><span class="irs-single">0</span></span><span class="irs-grid"><span class="irs-grid-pol" style="left: 0%"></span><span class="irs-grid-text js-grid-text-0" style="left: 0%">50</span><span class="irs-grid-pol small" style="left: 6.666666667%"></span><span class="irs-grid-pol small" style="left: 3.333333333%"></span><span class="irs-grid-pol" style="left: 10%"></span><span class="irs-grid-text js-grid-text-1" style="left: 10%; visibility: hidden;">90</span><span class="irs-grid-pol small" style="left: 16.666666667%"></span><span class="irs-grid-pol small" style="left: 13.333333333%"></span><span class="irs-grid-pol" style="left: 20%"></span><span class="irs-grid-text js-grid-text-2" style="left: 20%; visibility: hidden;">130</span><span class="irs-grid-pol small" style="left: 26.666666667%"></span><span class="irs-grid-pol small" style="left: 23.333333333%"></span><span class="irs-grid-pol" style="left: 30%"></span><span class="irs-grid-text js-grid-text-3" style="left: 30%; visibility: hidden;">170</span><span class="irs-grid-pol small" style="left: 36.666666667%"></span><span class="irs-grid-pol small" style="left: 33.333333333%"></span><span class="irs-grid-pol" style="left: 40%"></span><span class="irs-grid-text js-grid-text-4" style="left: 40%">210</span><span class="irs-grid-pol small" style="left: 46.666666667%"></span><span class="irs-grid-pol small" style="left: 43.333333333%"></span><span class="irs-grid-pol" style="left: 50%"></span><span class="irs-grid-text js-grid-text-5" style="left: 50%; visibility: hidden;">250</span><span class="irs-grid-pol small" style="left: 56.666666667%"></span><span class="irs-grid-pol small" style="left: 53.333333333%"></span><span class="irs-grid-pol" style="left: 60%"></span><span class="irs-grid-text js-grid-text-6" style="left: 60%; visibility: hidden;">290</span><span class="irs-grid-pol small" style="left: 66.666666667%"></span><span class="irs-grid-pol small" style="left: 63.333333333%"></span><span class="irs-grid-pol" style="left: 70%"></span><span class="irs-grid-text js-grid-text-7" style="left: 70%; visibility: hidden;">330</span><span class="irs-grid-pol small" style="left: 76.666666667%"></span><span class="irs-grid-pol small" style="left: 73.333333333%"></span><span class="irs-grid-pol" style="left: 80%"></span><span class="irs-grid-text js-grid-text-8" style="left: 80%">370</span><span class="irs-grid-pol small" style="left: 86.666666667%"></span><span class="irs-grid-pol small" style="left: 83.333333333%"></span><span class="irs-grid-pol" style="left: 90%"></span><span class="irs-grid-text js-grid-text-9" style="left: 90%; visibility: hidden;">410</span><span class="irs-grid-pol small" style="left: 96.666666667%"></span><span class="irs-grid-pol small" style="left: 93.333333333%"></span><span class="irs-grid-pol" style="left: 100%"></span><span class="irs-grid-text js-grid-text-10" style="left: 100%; visibility: hidden;">450</span></span><span class="irs-bar"></span><span class="irs-bar-edge"></span><span class="irs-shadow shadow-single"></span><span class="irs-slider single"></span></span><input readonly="readonly" class="js-range-slider irs-hidden-input shiny-bound-input" id="wt" data-min="50" data-max="450" data-from="150" data-step="1" data-grid="true" data-grid-num="10" data-grid-snap="false" data-prettify-separator="," data-keyboard="true" data-keyboard-step="0.25" data-drag-interval="true" data-data-type="number">
+</div>
+</div><div style="display: none;" data-display-if="input.units == 'Metric'">
+<div class="form-group shiny-input-container">
+<label class="control-label" for="htm">Height (in centimeters):</label>
+<span class="irs js-irs-2 irs-with-grid"><span class="irs"><span class="irs-line" tabindex="-1"><span class="irs-line-left"></span><span class="irs-line-mid"></span><span class="irs-line-right"></span></span><span class="irs-min">75</span><span class="irs-max">250</span><span style="visibility: hidden;" class="irs-from">0</span><span style="visibility: hidden;" class="irs-to">0</span><span class="irs-single">0</span></span><span class="irs-grid"><span class="irs-grid-pol" style="left: 0%"></span><span class="irs-grid-text js-grid-text-0" style="left: 0%">75</span><span class="irs-grid-pol small" style="left: 6.857142857%"></span><span class="irs-grid-pol small" style="left: 3.428571429%"></span><span class="irs-grid-pol" style="left: 10.285714286%"></span><span class="irs-grid-text js-grid-text-1" style="left: 10.2857%; visibility: hidden;">93</span><span class="irs-grid-pol small" style="left: 17.142857143%"></span><span class="irs-grid-pol small" style="left: 13.714285715%"></span><span class="irs-grid-pol" style="left: 20.571428572%"></span><span class="irs-grid-text js-grid-text-2" style="left: 20.5714%; visibility: hidden;">111</span><span class="irs-grid-pol small" style="left: 27.428571429%"></span><span class="irs-grid-pol small" style="left: 24.000000001%"></span><span class="irs-grid-pol" style="left: 30.857142858%"></span><span class="irs-grid-text js-grid-text-3" style="left: 30.8571%; visibility: hidden;">129</span><span class="irs-grid-pol small" style="left: 37.714285715%"></span><span class="irs-grid-pol small" style="left: 34.285714287%"></span><span class="irs-grid-pol" style="left: 41.142857144%"></span><span class="irs-grid-text js-grid-text-4" style="left: 41.142857144%">147</span><span class="irs-grid-pol small" style="left: 48.000000001%"></span><span class="irs-grid-pol small" style="left: 44.571428573%"></span><span class="irs-grid-pol" style="left: 51.42857143%"></span><span class="irs-grid-text js-grid-text-5" style="left: 51.4286%; visibility: hidden;">165</span><span class="irs-grid-pol small" style="left: 58.285714287%"></span><span class="irs-grid-pol small" style="left: 54.857142859%"></span><span class="irs-grid-pol" style="left: 61.714285716%"></span><span class="irs-grid-text js-grid-text-6" style="left: 61.7143%; visibility: hidden;">183</span><span class="irs-grid-pol small" style="left: 68.571428573%"></span><span class="irs-grid-pol small" style="left: 65.142857145%"></span><span class="irs-grid-pol" style="left: 72.000000002%"></span><span class="irs-grid-text js-grid-text-7" style="left: 72%; visibility: hidden;">201</span><span class="irs-grid-pol small" style="left: 78.857142859%"></span><span class="irs-grid-pol small" style="left: 75.428571431%"></span><span class="irs-grid-pol" style="left: 82.285714288%"></span><span class="irs-grid-text js-grid-text-8" style="left: 82.285714288%">219</span><span class="irs-grid-pol small" style="left: 89.142857145%"></span><span class="irs-grid-pol small" style="left: 85.714285717%"></span><span class="irs-grid-pol" style="left: 92.571428574%"></span><span class="irs-grid-text js-grid-text-9" style="left: 92.5714%; visibility: hidden;">237</span><span class="irs-grid-pol" style="left: 100%"></span><span class="irs-grid-text js-grid-text-10" style="left: 100%; visibility: hidden;">250</span></span><span class="irs-bar"></span><span class="irs-bar-edge"></span><span class="irs-shadow shadow-single"></span><span class="irs-slider single"></span></span><input readonly="readonly" class="js-range-slider irs-hidden-input shiny-bound-input" id="htm" data-min="75" data-max="250" data-from="165" data-step="1" data-grid="true" data-grid-num="9.72222222222222" data-grid-snap="false" data-prettify-separator="," data-keyboard="true" data-keyboard-step="0.571428571428571" data-drag-interval="true" data-data-type="number">
+</div>
+<div class="form-group shiny-input-container">
+<label class="control-label" for="wtm">Weight (in kilograms):</label>
+<span class="irs js-irs-3 irs-with-grid"><span class="irs"><span class="irs-line" tabindex="-1"><span class="irs-line-left"></span><span class="irs-line-mid"></span><span class="irs-line-right"></span></span><span class="irs-min">20</span><span class="irs-max">220</span><span style="visibility: hidden;" class="irs-from">0</span><span style="visibility: hidden;" class="irs-to">0</span><span class="irs-single">0</span></span><span class="irs-grid"><span class="irs-grid-pol" style="left: 0%"></span><span class="irs-grid-text js-grid-text-0" style="left: 0%">20</span><span class="irs-grid-pol small" style="left: 6.666666667%"></span><span class="irs-grid-pol small" style="left: 3.333333333%"></span><span class="irs-grid-pol" style="left: 10%"></span><span class="irs-grid-text js-grid-text-1" style="left: 10%; visibility: hidden;">40</span><span class="irs-grid-pol small" style="left: 16.666666667%"></span><span class="irs-grid-pol small" style="left: 13.333333333%"></span><span class="irs-grid-pol" style="left: 20%"></span><span class="irs-grid-text js-grid-text-2" style="left: 20%; visibility: hidden;">60</span><span class="irs-grid-pol small" style="left: 26.666666667%"></span><span class="irs-grid-pol small" style="left: 23.333333333%"></span><span class="irs-grid-pol" style="left: 30%"></span><span class="irs-grid-text js-grid-text-3" style="left: 30%; visibility: hidden;">80</span><span class="irs-grid-pol small" style="left: 36.666666667%"></span><span class="irs-grid-pol small" style="left: 33.333333333%"></span><span class="irs-grid-pol" style="left: 40%"></span><span class="irs-grid-text js-grid-text-4" style="left: 40%">100</span><span class="irs-grid-pol small" style="left: 46.666666667%"></span><span class="irs-grid-pol small" style="left: 43.333333333%"></span><span class="irs-grid-pol" style="left: 50%"></span><span class="irs-grid-text js-grid-text-5" style="left: 50%; visibility: hidden;">120</span><span class="irs-grid-pol small" style="left: 56.666666667%"></span><span class="irs-grid-pol small" style="left: 53.333333333%"></span><span class="irs-grid-pol" style="left: 60%"></span><span class="irs-grid-text js-grid-text-6" style="left: 60%; visibility: hidden;">140</span><span class="irs-grid-pol small" style="left: 66.666666667%"></span><span class="irs-grid-pol small" style="left: 63.333333333%"></span><span class="irs-grid-pol" style="left: 70%"></span><span class="irs-grid-text js-grid-text-7" style="left: 70%; visibility: hidden;">160</span><span class="irs-grid-pol small" style="left: 76.666666667%"></span><span class="irs-grid-pol small" style="left: 73.333333333%"></span><span class="irs-grid-pol" style="left: 80%"></span><span class="irs-grid-text js-grid-text-8" style="left: 80%">180</span><span class="irs-grid-pol small" style="left: 86.666666667%"></span><span class="irs-grid-pol small" style="left: 83.333333333%"></span><span class="irs-grid-pol" style="left: 90%"></span><span class="irs-grid-text js-grid-text-9" style="left: 90%; visibility: hidden;">200</span><span class="irs-grid-pol small" style="left: 96.666666667%"></span><span class="irs-grid-pol small" style="left: 93.333333333%"></span><span class="irs-grid-pol" style="left: 100%"></span><span class="irs-grid-text js-grid-text-10" style="left: 100%; visibility: hidden;">220</span></span><span class="irs-bar"></span><span class="irs-bar-edge"></span><span class="irs-shadow shadow-single"></span><span class="irs-slider single"></span></span><input readonly="readonly" class="js-range-slider irs-hidden-input shiny-bound-input" id="wtm" data-min="20" data-max="220" data-from="70" data-step="1" data-grid="true" data-grid-num="10" data-grid-snap="false" data-prettify-separator="," data-keyboard="true" data-keyboard-step="0.5" data-drag-interval="true" data-data-type="number">
+</div>
+</div><p>BMI = </p><div id="bmicalc" class="shiny-text-output shiny-bound-output"></div><p></p></article></slide>
+
+
+  <slide class="backdrop"></slide>
+
+<div id="prev-slide-area" class="slide-area"></div><div id="next-slide-area" class="slide-area"></div></slides>
+
+<script src="Body%20Mass%20Index%20Calculator_files/modernizr.js"></script>
+<script src="Body%20Mass%20Index%20Calculator_files/prettify.js"></script>
+<script src="Body%20Mass%20Index%20Calculator_files/lang-r.js"></script>
+<script src="Body%20Mass%20Index%20Calculator_files/lang-yaml.js"></script>
+<script src="Body%20Mass%20Index%20Calculator_files/hammer.js"></script>
+<script src="Body%20Mass%20Index%20Calculator_files/slide-controller.js"></script>
+<script src="Body%20Mass%20Index%20Calculator_files/slide-deck.js"></script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+</div>
+  </div>
+
+<div style="position: absolute; width: 0px; height: 0px; overflow: hidden; padding: 0px; border: 0px none; margin: 0px;"><div style="position: absolute; visibility: hidden; top: 0px; left: 0px; width: auto; padding: 0px; border: 0px none; margin: 0px; white-space: nowrap; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; font-size: 40px; font-weight: normal; font-style: normal; font-size-adjust: none; font-family: STIXSizeOneSym,sans-serif;" id="MathJax_Font_Test"></div></div></body></html>
